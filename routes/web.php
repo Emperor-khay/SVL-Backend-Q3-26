@@ -36,10 +36,11 @@ Route::get('/car/{id}/restore', [CarsController::class, 'restoreCar']);
 
 Route::resource('/properties', ResourceController::class);
 
-// Route::get('/', function(){
-//     $name = "Emmanuel";
-//     return view('welcome', compact('name'));
-//     }
-// );
+Route::get('/', function(){
+    $name = "Emmanuel";
+    $role = "Admin";
+    return view('welcome', compact('name', 'role'));
+    }
+);
 
 

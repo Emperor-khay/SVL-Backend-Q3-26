@@ -42,7 +42,7 @@ class TestController extends Controller
         $request->validated();
 
         //Pa$$w0rd!
-        dd($request->all());
+        // dd($request->all());
 
         $user = User::create([
             'name' => $request->fullname,
@@ -65,7 +65,7 @@ class TestController extends Controller
         );
 
         if ($validator->fails()) {
-            dd($validator->errors()->toArray());
+            // dd($validator->errors()->toArray());
             return redirect()->back()
                         ->withErrors($validator)
                         ->withInput()
