@@ -21,7 +21,7 @@
                 </div>
 
                 <!-- Form -->
-                <form action="{{ route('create.car') }}" method="POST" class="p-8 space-y-6">
+                <form action="{{ route('create.car') }}" enctype="multipart/form-data" method="POST" class="p-8 space-y-6">
                     @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
@@ -113,11 +113,26 @@
                             <select name="status"
                                 class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition">
                                 <option value="">Select Status</option>
-                                <option value="available" @selected({{ old('status') }})>Available</option>
+                                <option value="available">Available</option>
                                 <option value="sold">Sold</option>
                                 <option value="in_purchase">In Purchase</option>
                             </select>
                             @error('status')
+                                <span class="text-red-500">
+                                    {{ $message }}*
+                                </span>
+                            @enderror
+
+                        </div>
+
+                        {{-- FIle Upload --}}
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                File
+                            </label>
+
+                            <input type="file" name="carImage" id="">
+                            @error('carImage')
                                 <span class="text-red-500">
                                     {{ $message }}*
                                 </span>

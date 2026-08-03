@@ -58,7 +58,11 @@
                     <div class="bg-gray-200 flex items-center justify-center h-80 md:h-full">
 
                         <img
+                        @if ($car->image)                            
+                            src="{{ asset('storage/'.$car->image) }}"
+                        @else
                             src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80"
+                        @endif
                             alt="Car"
                             class="w-full h-full object-cover">
 

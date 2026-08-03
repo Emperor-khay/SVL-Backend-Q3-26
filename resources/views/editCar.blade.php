@@ -19,7 +19,7 @@
                 </div>
 
                 <!-- Form -->
-                <form action="/car/{{ $car->id }}/update" method="POST" class="p-8 space-y-6">
+                <form action="/car/{{ $car->id }}/update" enctype="multipart/form-data" method="POST" class="p-8 space-y-6">
                     @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
@@ -123,15 +123,37 @@
 
                         </div>
 
+                        <!-- File Upload -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                Status
+                            </label>
+
+                           <input type="file" name="carImage" id="">
+                            @error('carImage')
+                                <span class="text-red-500">
+                                    {{ $message }}*
+                                </span>
+                            @enderror
+                            
+                            @if($car->image)
+                                {{-- <h1>Car has image</h1> --}}
+                                <div>
+                                    <img src="{{ asset('storage/'.$car->image) }}" alt="">
+                                </div>
+                            @endif
+
+                        </div>
+
                     </div>
 
                     <!-- Buttons -->
                     <div class="border-t pt-6 flex flex-col sm:flex-row justify-end gap-3">
 
-                        <button type="reset"
+                        <a href="/cars"
                             class="px-6 py-3 rounded-lg border border-gray-300 hover:bg-gray-100 transition font-medium">
-                            Reset
-                        </button>
+                            Back
+                        </a>
 
                         <button type="submit"
                             class="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-md transition">

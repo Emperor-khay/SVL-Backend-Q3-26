@@ -16,5 +16,6 @@ class Cars extends Model
         'year',
         'colour',
         'price',
+        'image',
     ];
 }

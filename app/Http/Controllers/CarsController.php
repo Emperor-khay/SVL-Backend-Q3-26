@@ -23,22 +23,16 @@ class CarsController extends Controller
         return view('carlistings', compact('cars'));
     }
 
-    public function create(Request $request) {
-       
-        // dd(
-        //     $request->all(),
-        //     $request->model,
-        //     $request->input('model')
-        // );
-
+    public function validateCar(Request $request){
          $validator = Validator::make(
             $request->all(), [
-                'name' => ['max:20', 'min:10', 'required'],
+                'name' => ['max:20', 'max:20', 'required'],
                 'model' => ['required'],
                 'year' => ['required'],
                 'price' => ['required'],
                 'status' => ['required'],
                 'colour' => ['required'],
+                'carImage' => ['required', 'image', 'max:2048']
             ]);
 
             if ($validator->fails()) {
@@ -48,6 +42,26 @@ class CarsController extends Controller
                         ->withErrors($validator)
                         ->withInput();
             }
+
+            return $validator;
+    }
+
+    public function uploadCarImage(Request $request){
+        $fileExtension = $request->file('carImage')->getClientOriginalExtension();
+        $fileName = time().'-'.$request->name.$request->model.$request->year.'.'.$fileExtension;
+        // dd($fileName, $fileExtension);
+        $pathToImage =  $request->file('carImage')->storeAs('car',$fileName,  'public');
+
+        return $pathToImage;
+    }
+
+    public function create(Request $request) {
+        $this->validateCar($request);
+
+        if($request->hasFile('carImage')){
+            $path = $this->uploadCarImage($request);
+        }
+
         // $request->validated();
         // dd($request);
        
@@ -69,6 +83,7 @@ class CarsController extends Controller
             'year' => $request->year,
             'colour' => $request->colour,
             'price' => $request->price,
+            'image' => $path ?? null
         ]);
 
 
@@ -89,7 +104,21 @@ class CarsController extends Controller
         // unset($request['_token']);
         // dd($request->all());
 
-        $car->update($request->all());
+        $this->validateCar($request);
+
+
+        if($request->hasFile('carImage')){
+            $path = $this->uploadCarImage($request);
+        }
+        $car->update([
+            'name' => $request->name,
+            'model' => $request->model,
+            'status' => $request->status,
+            'year' => $request->year,
+            'colour' => $request->colour,
+            'price' => $request->price,
+            'image' => $path ?? null
+        ]);
         // $car->name = "Mazda";
         // $car->save();
 
