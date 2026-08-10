@@ -16,12 +16,22 @@ class CarsController extends Controller
         return view('cars');
     }
 
-    public function index(){
-        $cars = Cars::orderby('created_at', 'DESC')->get();
+    public function index(Request $request){
+        // $cars = Cars::orderby('created_at', 'DESC')->get();
+        $text = $request->query('search');
+
+        $cars = Cars::where('name', 'like', "%{$text}%")->
+        // $cars = Cars::where('name', '=', $text)->
+        latest()->paginate(1);
         // $cars = Cars::all();
-        // dd($cars);       
+        // dd($cars);
         return view('carlistings', compact('cars'));
     }
+
+    // public function search($text){
+    //     $cars = Cars::where('name', 'like', "%{$text}%")->paginate(4);
+    //     return view('carlistings', ['cars'=>$cars]);
+    // }
 
     public function validateCar(Request $request){
          $validator = Validator::make(
@@ -64,7 +74,7 @@ class CarsController extends Controller
 
         // $request->validated();
         // dd($request);
-       
+
         // $cars = new Cars;
         // $cars->name = ;
         // $cars->model = $request->modelName;
@@ -74,7 +84,7 @@ class CarsController extends Controller
         // $cars->price = ;
         // $cars->save();
 
-        
+
 
         $cars = Cars::create([
             'name' => $request->name,
@@ -92,7 +102,7 @@ class CarsController extends Controller
         // dd($cars);
 
     }
- 
+
     public function show(int $id){
         $car = Cars::findorfail($id);
 

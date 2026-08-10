@@ -29,11 +29,12 @@ Route::post('/cars/create', [CarsController::class, 'create'])->name('create.car
 Route::get('/cars/add', [CarsController::class, 'addForm']);
 // Route::get('/cars/edit', [CarsController::class, 'editForm']);
 Route::get('/cars', [CarsController::class, 'index'])->middleware(TestMiddleware::class);
+Route::post('/test', [CarsController::class, 'index'])->middleware(TestMiddleware::class);
 Route::get('/car/{id}', [CarsController::class, 'show']);
 Route::post('/car/{id}/update', [CarsController::class, 'update']);
 Route::post('car/{id}/delete', [CarsController::class, 'destroy']);
 Route::get('/car/{id}/restore', [CarsController::class, 'restoreCar']);
-
+// Route::get('cars')
 Route::resource('/properties', ResourceController::class);
 
 Route::get('/', function(){
@@ -42,5 +43,6 @@ Route::get('/', function(){
     return view('welcome', compact('name', 'role'));
     }
 );
+
 
 

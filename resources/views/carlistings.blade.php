@@ -8,11 +8,17 @@
 <!-- Navbar -->
 <nav class="bg-white shadow-md">
     <div class=" mx-auto px-6">
-        <div class="flex justify-between items-center h-16">
+        <div class="flex justify-around items-center h-16">
 
             <div class="text-2xl font-bold text-blue-600">
                 AutoMarket
             </div>
+
+            <form method="GET" action="/cars">
+                {{-- @csrf --}}
+                <input type="text" name="search" id="" class="border rounded-md border-gray-300 px-3 py-1">
+                <input type="submit" value="Search" class="bg-blue-600 hover:bg-blue-800 text-white px-3 rounded-md py-1 cursor-pointer">
+            </form>
 
             <div class="hidden md:flex space-x-8">
                 <a href="#" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
@@ -38,10 +44,10 @@
         </div>
     </div>
 </nav>
-    
+
 @endsection
 
-@section('content')    
+@section('content')
 
     <!-- Main Content -->
     <div class=" p-6">
@@ -49,7 +55,7 @@
         <div>
             <a href="/cars/add" class="rounded-md bg-blue-700 text-white p-3 my-3 flex justify-self-end">Add New Car</a>
         </div>
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden grid grid-cols-3 gap-[30px]">
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden grid grid-cols-4 gap-[30px]">
 
             @forelse ($cars as $car)
                 <div class="grid md:grid-cols-1">
@@ -58,13 +64,13 @@
                     <div class="bg-gray-200 flex items-center justify-center h-80 md:h-full">
 
                         <img
-                        @if ($car->image)                            
+                        @if ($car->image)
                             src="{{ asset('storage/'.$car->image) }}"
                         @else
                             src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80"
                         @endif
                             alt="Car"
-                            class="w-full h-full object-cover">
+                            class=" object-cover h-[100px] w-[100px]">
 
                     </div>
 
@@ -88,7 +94,7 @@
                                     $colour = 'green';
                                     $canPurchase = true;
                                     break;
-                                
+
                             }
                         @endphp
                         <span class="inline-block px-4 py-1 rounded-full bg-[@php echo $colour @endphp] text-white text-sm font-semibold mb-4">
@@ -157,9 +163,13 @@
 
                 </div>
             @empty
-                
+                <p class="text-center text-red-500 col-span-4">No Cars Available</p>
             @endforelse
 
+        </div>
+
+        <div>
+            {{ $cars->links() }}
         </div>
 
     </div>

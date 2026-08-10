@@ -32,9 +32,14 @@
         <h1>Welcome User</h1>
     @endif --}}
 
-    
 
+
+    {{-- <x-example-component>
+        <p>
+            Inserted Slot
+        </p> --}}
     <x-example-component/>
+    @include('partials.footer', ['name' => $name] )
 
     @component('components.test-component')
 
@@ -43,5 +48,4 @@
 
     <a href="{{ route('login') }}">Go to login page</a>
     <a href="{{ route('register') }}">Go to register page</a>
-    @include('partials.footer', ['name' => $name] )
 @endsection
