@@ -4,9 +4,6 @@
     Laravel Demo
 @endsection
 
-@section('hero')
-
-@endsection
 
 @section('head')
 <meta charset="UTF-8">
@@ -14,16 +11,18 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 @endsection
 
+
 @section('content')
 
-    @switch($role)
+    <h1>Welcome {{ $name }}</h1>
+    {{-- @switch($role)
         @case('admin')
             <h1>Welcome Admin</h1>
             @break
 
         @default
             <h1>Welcome User</h1>
-    @endswitch
+    @endswitch --}}
 
         <h1>This is the home page</h1>
     {{-- @if($role == 'admin')
@@ -39,12 +38,13 @@
             Inserted Slot
         </p> --}}
     <x-example-component/>
-    @include('partials.footer', ['name' => $name] )
 
-    @component('components.test-component')
 
-    @endcomponent
+    @include('partials.footer', ['name' => "Schoolville"] )
+    @include('partials.footer', ['name' => "Cowrywise"] )
+    @include('partials.footer', ['name' => "W3Schools"] )
 
+   {{-- <x-test-component/> --}}
 
     <a href="{{ route('login') }}">Go to login page</a>
     <a href="{{ route('register') }}">Go to register page</a>

@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 
-Route::prefix('/auth')
+Route::
+// prefix('/auth')
 // ->middleware(TestMiddleware::class)
-->controller(TestController::class)
+controller(TestController::class)
 ->group(function(){
     Route::get('/register', 'register')->name('register');
     Route::post('/register', 'doregister')->name('register');
@@ -25,6 +26,7 @@ Route::prefix('/auth')
 
 });
 
+
 Route::post('/cars/create', [CarsController::class, 'create'])->name('create.car');
 Route::get('/cars/add', [CarsController::class, 'addForm']);
 // Route::get('/cars/edit', [CarsController::class, 'editForm']);
@@ -37,12 +39,12 @@ Route::get('/car/{id}/restore', [CarsController::class, 'restoreCar']);
 // Route::get('cars')
 Route::resource('/properties', ResourceController::class);
 
-Route::get('/', function(){
-    $name = "Emmanuel";
-    $role = "Admin";
-    return view('welcome', compact('name', 'role'));
-    }
-);
+// Route::get('/', function(){
+//     $name = "Emmanuel";
+//     $role = "Admin";
+//     return view('welcome', compact('name', 'role'));
+//     }
+// );
 
 
 

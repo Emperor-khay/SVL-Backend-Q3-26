@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class TestController extends Controller
 {
-    
+
 
     public function register() {
         return view('register');
@@ -24,13 +24,14 @@ class TestController extends Controller
 
     public function showWelcomePage(){
 
-        $name = "Emmanuel";
+        $name = "Proser";
 
 
         // $name->first_name;
 
         $role = 'admin';
-        return view('welcome', compact('role', 'name'));
+        return view('welcome', ['name' => $name]);
+        return view('welcome', compact('name'));
     }
 
     public function home($string){
@@ -91,7 +92,7 @@ class TestController extends Controller
             Log::info('Password Is Not Correct!');
             return redirect()->back()->with('error', 'Password Is Not Correct!');
         }
-    
+
 
     }
 }
