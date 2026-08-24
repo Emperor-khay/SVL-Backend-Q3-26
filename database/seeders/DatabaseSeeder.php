@@ -16,9 +16,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        $this->call([
-            CarSeeder::class
-        ]);
+        $this->call(
+            // CarSeeder::class
+            ExampleSeeder::class
+        );
 
         // User::factory(10)->create();
 
@@ -26,5 +27,7 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        // Car::factory
     }
 }

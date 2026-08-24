@@ -13,6 +13,7 @@ class CarSeeder extends Seeder
      */
     public function run(): void
     {
+        
         DB::transaction(function(){
             DB::table('cars')->insert([
                 'name' => 'Mercedes',
