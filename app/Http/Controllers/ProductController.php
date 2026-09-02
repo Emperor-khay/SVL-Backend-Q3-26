@@ -53,9 +53,7 @@ class ProductController extends Controller
     }
 
     // UPDATE
-    public function updateProduct(int $id, ProductRequest $request) {
-    dd('ji');
-    $validated = $request->validated();
+    public function updateProduct(int $id, Request $request) {
     $product = Product::where('id', $id )->first();
         // $product = Product::findorfail(17);
 
@@ -63,7 +61,7 @@ class ProductController extends Controller
         //     'name' => 'Unkown'
         // ]);
 
-        $product->name = $validated['productname'];
+        $product->name = $request->input('productname');
         $product->qty = $request->input('qty');
         $product->price = $request->input('price');
         $product->discount = $request->input('discount');
