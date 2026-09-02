@@ -13,6 +13,9 @@
             <div class="text-2xl font-bold text-blue-600">
                 AutoMarket
             </div>
+            @error()
+
+            @enderror
 
             <form method="GET" action="/cars">
                 {{-- @csrf --}}

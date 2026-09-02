@@ -19,6 +19,7 @@ return new class extends Migration
             $table->boolean('is_top_selling');
             $table->decimal('discount', 9, 2)->nullable();
             $table->timestamps();
+           
         });
     }
 

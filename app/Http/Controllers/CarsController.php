@@ -34,15 +34,23 @@ class CarsController extends Controller
     // }
 
     public function validateCar(Request $request){
+
+    dd("hi");
          $validator = Validator::make(
-            $request->all(), [
-                'name' => ['max:20', 'max:20', 'required'],
+            $request->all(), 
+            [
+                'name' => ['max:20', 'required'],
                 'model' => ['required'],
                 'year' => ['required'],
                 'price' => ['required'],
                 'status' => ['required'],
                 'colour' => ['required'],
                 'carImage' => ['required', 'image', 'max:2048']
+            ],
+            [
+                'name.required' => "Please Input a Car Name",
+                'name.max' => "Car name cannot exceed 20 characters",
+                'model.required' => "Please Enter a Model for this car",
             ]);
 
             if ($validator->fails()) {

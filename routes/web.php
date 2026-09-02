@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarsController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\TestController;
 use App\Http\Middleware\TestMiddleware;
@@ -39,12 +40,23 @@ Route::get('/car/{id}/restore', [CarsController::class, 'restoreCar']);
 // Route::get('cars')
 Route::resource('/properties', ResourceController::class);
 
-// Route::get('/', function(){
-//     $name = "Emmanuel";
-//     $role = "Admin";
-//     return view('welcome', compact('name', 'role'));
-//     }
-// );
+Route::get('/', function(){
+    $name = "Emmanuel";
+    $role = "Admin";
+    return view('welcome', compact('name', 'role'));
+    }
+);
+
+Route::controller(ProductController::class)->prefix('/product')->group(function() {
+    Route::post('/add', 'addproduct');
+    Route::get('/add', 'addProductForm');
+    Route::get('/index', 'getProducts' );
+    Route::get('/{product}', 'getProduct');
+    Route::post('/{product}', 'updateProduct')->name('product.update');
+    Route::get('{product}/edit', 'editProductForm');
+    Route::get('/{product}/delete', 'deleteProduct');
+    Route::get('/{product}/restore', 'restoreProduct');
+});
 
 
 

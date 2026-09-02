@@ -10,7 +10,7 @@
         <div class="max-w-4xl mx-auto px-4">
             <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
 
-                    
+
 
                 <!-- Header -->
                 <div class="bg-indigo-600 px-8 py-6">
