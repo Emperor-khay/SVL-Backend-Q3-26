@@ -20,9 +20,13 @@ class CarsController extends Controller
         // $cars = Cars::orderby('created_at', 'DESC')->get();
         $text = $request->query('search');
 
-        $cars = Cars::where('name', 'like', "%{$text}%")->
+        // dd($text);
+        $cars = Cars::where('name', 'like', "%$text%")
+                ->orWhere('model', 'like', "%$text%")
+        ->orWhere('price', 'like', "%$text%")
+        ->orWhere('colour', 'like', "%$text%")
+        ->latest()->paginate(4);
         // $cars = Cars::where('name', '=', $text)->
-        latest()->paginate(1);
         // $cars = Cars::all();
         // dd($cars);
         return view('carlistings', compact('cars'));
@@ -37,7 +41,7 @@ class CarsController extends Controller
 
     dd("hi");
          $validator = Validator::make(
-            $request->all(), 
+            $request->all(),
             [
                 'name' => ['max:20', 'required'],
                 'model' => ['required'],
